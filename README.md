@@ -46,6 +46,20 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 Run `npm run precache` after `ng build` to caching all the static resources in the `dist/service-worker.js`.
 
+## Database schema
+```bash
+{ 
+  groupTask : [string],
+  status : [enum: public/private],
+  userId : [string],
+  detail : [{
+    description : [string],
+    state : [boolean],
+    title : [string]
+  }]
+}
+```
+
 ## Further help
 
 To get more help on the `angular-cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

@@ -1,0 +1,68 @@
+<app-navbar></app-navbar>
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <label for="groupTask">Group Task</label>
+        </div>
+        <div class="panel-body">
+          <form (submit)="editGroupTask" #groupTaskForm="ngForm">
+            <div class="form-inline">
+              <input placeholder="Group Task" [(ngModel)]="list.groupTask" required id="groupTask" name="groupTask" type="text" class="form-control" />
+            </div>
+            <br/>
+            <div class="form-inline">
+              <div class="radio">
+                <label><input name="status" type="radio" [(ngModel)]="list.status" value="public"/>Public</label>
+                <label><input name="status" type="radio" [(ngModel)]="list.status" value="private"/>Private</label>
+              </div>
+            </div>
+            <br/>
+            <button [disabled]="!list.groupTask" type="submit" class="btn btn-primary" (click)="saveGroupTask()">Save</button>
+          </form>
+        </div>
+      </div>
+      <div *ngIf="id" class="panel panel-default">
+        <div class="panel-heading">
+          <label>To Do</label>
+        </div>
+        <div class="panel-body">
+          <form #todoForm="ngForm">
+            <label for="title">Title</label>
+            <div class="form-inline">
+              <input placeholder="Title" [(ngModel)]="todo.title" required id="title" name="title" type="text" class="form-control" />
+            </div>
+            <br/>
+            <label for="description">Description</label>
+            <div class="form-inline">
+              <textarea placeholder="Description" required [(ngModel)]="todo.description" id="description" name="description" class="form-control">
+          </textarea>
+            </div>
+            <br/>
+            <button [disabled]="!(todo.title && todo.description)" type="button" (click)="saveToDo()" class="btn btn-primary">Add New To Do</button>
+          </form>
+        </div>
+      </div>
+      <div *ngIf="id" class="panel panel-default">
+        <div class="panel-heading">
+          <label>All Task</label>
+        </div>
+        <div class="panel-body">
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let todo of todos; let i=index">
+              <label>
+          <input type="checkbox" name="state" [(ngModel)]="todo.state"
+          (change)="checkToDo()">
+            {{todo.title}} - {{todo.description}}
+        </label>
+            </li>
+          </ul>
+          <div class="text-center">
+            <i class="fa fa-3x fa-spin fa-spinner" *ngIf="isLoad"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

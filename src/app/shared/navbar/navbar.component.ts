@@ -25,8 +25,8 @@ export class NavbarComponent implements OnInit {
       this.subscription.unsubscribe();
     }
     localStorage.clear();
-    this.router.navigateByUrl('login');
     this.angularFire.auth.logout();
+    this.router.navigateByUrl('login');
   }
 
   goToHome() {

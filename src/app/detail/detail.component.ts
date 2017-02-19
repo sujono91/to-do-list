@@ -1,7 +1,6 @@
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-import { TooltipDirective } from 'ng2-bootstrap/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription } from 'rxjs/Rx';
 import { AngularFire } from 'angularfire2';
@@ -13,10 +12,11 @@ import { ToDo } from './todo.model';
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.css']
 })
-export class DetailComponent implements OnInit {
+export class DetailComponent implements OnInit, OnDestroy {
   private value: FirebaseObjectObservable<any>;
   private values: FirebaseListObservable<Array<any>>;
   user = JSON.parse(localStorage.getItem('user'));
+  subscription: Subscription;
   list: any = {
     status: 'public',
     groupTask: '',
@@ -40,7 +40,7 @@ export class DetailComponent implements OnInit {
     if (this.id) {
       this.value = this.angularFire.database.object(`to-do-list/${this.id}`);
       this.isLoad = true;
-      this.value.subscribe((result: any) => {
+      this.subscription = this.value.subscribe((result: any) => {
         if (result.userId !== this.user.userId && result.status === 'private') {
           return;
         }
@@ -50,6 +50,12 @@ export class DetailComponent implements OnInit {
       });
     } else {
       this.values = this.angularFire.database.list('to-do-list');
+    }
+  }
+
+  ngOnDestroy() {
+    if(this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 

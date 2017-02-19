@@ -9,13 +9,13 @@ import {
   AngularFireModule,
   AuthMethods,
   AuthProviders
-} from "angularfire2";
+} from 'angularfire2';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDHmfFvjh0Qq5lEEcsr1PhgjewHV25D_SQ",
-  authDomain: "to-do-list-5dc91.firebaseapp.com",
-  databaseURL: "https://to-do-list-5dc91.firebaseio.com",
-  storageBucket: "to-do-list-5dc91.appspot.com"
+  apiKey: 'AIzaSyDHmfFvjh0Qq5lEEcsr1PhgjewHV25D_SQ',
+  authDomain: 'to-do-list-5dc91.firebaseapp.com',
+  databaseURL: 'https://to-do-list-5dc91.firebaseio.com',
+  storageBucket: 'to-do-list-5dc91.appspot.com'
 };
 
 @NgModule({

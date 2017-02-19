@@ -53,9 +53,6 @@ export class DetailComponent implements OnInit {
     }
   }
 
-  ngOnDestroy() {
-  }
-
   checkToDo() {
     this.saveWithDetail();
   }

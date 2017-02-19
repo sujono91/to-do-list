@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) {
     this.subscription = this.af.auth.subscribe(
       user => this.changeState(user),
-      error => console.trace(error)
+      error => console.log(error)
     );
   }
 
@@ -34,7 +34,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   login() {
     this.af.auth.login({
-      provider: AuthProviders.Google
+      provider: AuthProviders.Google,
+      method: AuthMethods.Redirect
     });
   }
 

@@ -10,27 +10,30 @@ import { AngularFire } from 'angularfire2';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  private subscription: Subscription;
+  subscription: Subscription;
   todoList: Array<any> = [];
-  isLoad: boolean = true;
+  isLoad = true;
   user = JSON.parse(localStorage.getItem('user'));
 
   constructor(private angularFire: AngularFire,
     private router: Router) { }
 
   ngOnInit() {
-    this.angularFire.database.list('to-do-list')
+    this.subscription = this.angularFire.database.list('to-do-list')
       .subscribe((result: Array<any>) => {
         this.todoList = result;
-        this.todoList = this.todoList.filter((result: any) => {
-          return (result.status === 'private' && result.userId === this.user.userId)
-            || result.status === 'public';
+        this.todoList = this.todoList.filter((r: any) => {
+          return (r.status === 'private' && r.userId === this.user.userId)
+            || r.status === 'public';
         });
         this.isLoad = false;
       });
   }
 
   ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   edit(index: number) {

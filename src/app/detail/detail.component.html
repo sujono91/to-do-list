@@ -7,7 +7,7 @@
           <label for="groupTask">Group Task</label>
         </div>
         <div class="panel-body">
-          <form (submit)="editGroupTask" #groupTaskForm="ngForm">
+          <form #groupTaskForm="ngForm">
             <div class="form-inline">
               <input placeholder="Group Task" [(ngModel)]="list.groupTask" required id="groupTask" name="groupTask" type="text" class="form-control" />
             </div>

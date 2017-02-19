@@ -1,15 +1,18 @@
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: 'login',
-    loadChildren: 'app/login/login.module#LoginModule'
+    component: LoginComponent
   },
   {
     path: 'home',
-    loadChildren: 'app/home/dashboard.module#DashboardModule'
+    component: HomeComponent
   }
 ];
 
